@@ -48,6 +48,8 @@ Plugin 'elzr/vim-json'
 " Peaksea colorscheme
 Plugin 'vim-scripts/peaksea'
 
+" ACK
+Plugin 'mileszs/ack.vim'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -221,10 +223,10 @@ set guifont=Source\ Code\ Pro\ for\ Powerline
 " Use the same symbols as TextMate for tabstops and EOLs
 scriptencoding utf-8
 set encoding=utf-8
-set listchars=trail:·,precedes:«,extends:»,eol:↲,tab:▸\ 
+set listchars=trail:·,precedes:«,extends:»,tab:▸\ ,eol:↲
 
 " Show matching brackets
-set showmatch 
+set showmatch
 
 " Colorscheme
 if has("gui_running")
@@ -371,6 +373,11 @@ nmap <leader>l :set list!<CR>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Helper Functions
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+function! CmdLine(str)
+    exe "menu Foo.Bar :" . a:str
+    emenu Foo.Bar
+    unmenu Foo
+endfunction
 
 function! VisualSelection(direction, extra_filter) range
     let l:saved_reg = @"
