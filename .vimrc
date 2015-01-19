@@ -265,7 +265,7 @@ nmap <leader>u vawU<esc>e
 imap <C-u> <esc>vawU<esc>a
 
 " On INSERT mode, Ctrl-d will empty the current line
-imap <C-d> <esc>ddo
+imap <C-d> <esc>ddO
 
 " Put double and single quotes around the current word
 nnoremap <leader>" ea"<esc>hbi"<esc>lel
