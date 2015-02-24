@@ -51,6 +51,12 @@ Plugin 'vim-scripts/peaksea'
 " ACK
 Plugin 'mileszs/ack.vim'
 
+" FuGITive
+Plugin 'tpope/vim-fugitive'
+
+" AutoClose
+Plugin 'Townk/vim-autoclose'
+
 call vundle#end()            " required
 filetype plugin indent on    " required
 
@@ -112,6 +118,9 @@ set tm=500
 
 " Enable syntax highlight
 syntax enable
+
+" Set system clipboard
+set clipboard=unnamed
 
 
 " => Text, tab and indent related
@@ -255,6 +264,7 @@ set laststatus=2
 set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l
 
 
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Utilities
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -299,6 +309,9 @@ autocmd BufReadPost *
      \   exe "normal! g`\"" |
      \ endif
 
+
+" TODO Commit and push changes
+" nmap <A-u> :Git add .<CR>:Git commit<CR>:Git push
 
 " => Visual mode related
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -455,6 +468,11 @@ set stal=2
 set tabline=%!CustomizedTabLine()
 
 
+" Add current time to airline, next to file encoding
+function! AirlineInit()
+    let g:airline_section_y = airline#section#create(['ffenc', ' %{strftime("%H:%M")}'])
+endfunction
+autocmd VimEnter * call AirlineInit()
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => FileTypes
