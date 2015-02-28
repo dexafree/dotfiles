@@ -156,6 +156,22 @@ set wrap
 " More useful command-line completion
 set wildmenu
 
+" => Autocompletion
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" https://github.com/thoughtbot/dotfiles/blob/master/vimrc
+" Will insert tab at beginning of line
+" Will use completion if not at beginning
+set wildmode=list:longest,list:full
+function! InsertTabWrapper()
+    let col = col('.') - 1
+    if !col || getline('.')[col - 1] !~ '\k'
+        return "\<tab>"
+    else
+        return "\<c-p>"
+    endif
+endfunction
+inoremap <Tab> <c-r>=InsertTabWrapper()<cr>
+inoremap <S-Tab> <c-n>
 
 
 " => Backups
@@ -240,7 +256,9 @@ set showmatch
 " Colorscheme
 if has("gui_running")
     set background=dark
-    colorscheme peaksea
+    colorscheme desert
+"    colorscheme peaksea
+    let g:colors_name="desert"
 else
     colorscheme desert
     let g:colors_name="desert"
@@ -312,6 +330,9 @@ autocmd BufReadPost *
 
 " TODO Commit and push changes
 " nmap <A-u> :Git add .<CR>:Git commit<CR>:Git push
+
+" Set Markdown H1 title
+nnoremap <leader>1 yypVr=
 
 " => Visual mode related
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -418,7 +439,7 @@ endfunction
 function! HasPaste()
     if &paste
         return 'PASTE MODE  '
-    en
+    endif
     return ''
 endfunction
 
@@ -541,6 +562,12 @@ map <leader>f :MRU<CR>
 " => Syntastic (syntax checker)
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:syntastic_python_checkers=['pyflakes']
+
+" => Markdown syntax fenced blocks
+""""""""""""""""""""""""""""""""""
+
+au BufNewFile,BufReadPost *.md set filetype=markdown
+let g:markdown_fenced_languages = ['css', 'erb=eruby', 'javascript', 'js=javascript', 'json=javascript', 'ruby', 'sass', 'xml', 'html', 'java', 'c', 'sql']
 
 " => NERDTree
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
