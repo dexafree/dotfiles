@@ -57,6 +57,9 @@ Plugin 'tpope/vim-fugitive'
 " AutoClose
 Plugin 'Townk/vim-autoclose'
 
+" UltiSnips
+Plugin 'SirVer/ultisnips'
+
 call vundle#end()            " required
 filetype plugin indent on    " required
 
@@ -573,3 +576,11 @@ let g:markdown_fenced_languages = ['css', 'erb=eruby', 'javascript', 'js=javascr
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Distinct folders
 let NERDTreeHijackNetrw = 1
+
+" => UltiSnips
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" When running :UltiSnipsEdit, open a new panel split in vertical
+let g:UltiSnipsEditSplit="vertical"
+
+" As I have defined <Tab> as completion, use Shift+Down to expand the snippet
+let g:UltiSnipsExpandTrigger="<S-Down>"
