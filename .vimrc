@@ -60,6 +60,9 @@ Plugin 'Townk/vim-autoclose'
 " UltiSnips
 Plugin 'SirVer/ultisnips'
 
+" Vim-Sneak
+Plugin 'justinmk/vim-sneak'
+
 call vundle#end()            " required
 filetype plugin indent on    " required
 
@@ -584,3 +587,8 @@ let g:UltiSnipsEditSplit="vertical"
 
 " As I have defined <Tab> as completion, use Shift+Down to expand the snippet
 let g:UltiSnipsExpandTrigger="<S-Down>"
+
+" => VimSneak
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Map SneakPrevious to ?, as , is set to <leader>
+nmap ? <Plug>SneakPrevious
