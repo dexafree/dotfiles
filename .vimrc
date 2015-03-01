@@ -318,7 +318,7 @@ nnoremap <silent> <leader><space> :noh<cr>:call clearmatches()<cr>
 nnoremap <c-s-left> 5<c-w>>
 nnoremap <c-s-right> 5<c-w><
 
-" Open new empty buffer with <C-n>, and place it to the right
+" Open new empty buffer with <C-w>n, and place it to the right
 nnoremap <C-w>n :vnew<CR><C-w>L
 
 " Quickfix window with ,/
