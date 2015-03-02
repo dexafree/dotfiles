@@ -63,6 +63,9 @@ Plugin 'SirVer/ultisnips'
 " Vim-Sneak
 Plugin 'justinmk/vim-sneak'
 
+" Clever-f (f F improved)
+Plugin 'rhysd/clever-f.vim'
+
 call vundle#end()            " required
 filetype plugin indent on    " required
 
