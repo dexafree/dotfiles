@@ -183,7 +183,9 @@ function! InsertTabWrapper()
         return "\<c-p>"
     endif
 endfunction
-inoremap <Tab> <c-r>=InsertTabWrapper()<cr>
+
+" Actual mapping (made silent in order not to show every call)
+inoremap <silent> <Tab> <c-r>=InsertTabWrapper()<cr>
 inoremap <S-Tab> <c-n>
 
 
@@ -232,6 +234,9 @@ map <C-j> <C-W>j
 map <C-k> <C-W>k
 map <C-h> <C-W>h
 map <C-l> <C-W>l
+
+" After searching, center the cursor
+nnoremap n nzz
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
