@@ -66,6 +66,10 @@ Plugin 'justinmk/vim-sneak'
 " Clever-f (f F improved)
 Plugin 'rhysd/clever-f.vim'
 
+" YankRing (Not used anymore)
+" Plugin 'vim-scripts/YankRing.vim'
+
+
 call vundle#end()            " required
 filetype plugin indent on    " required
 
@@ -82,7 +86,6 @@ filetype plugin indent on    " required
 
 " Removing plugins
 " :PluginClean
-
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -410,9 +413,6 @@ nnoremap <leader>sv :source $MYVIMRC<cr>
 " Quick access to TO-DO
 nnoremap <leader>td <C-w>v<C-w>l<C-w>s<C-w>k:e ~/.todos<cr>
 
-" Clear search highlight
-nnoremap <F3> :nohl<CR>
-
 " Pastemode toggle <F2>
 nnoremap <F2> :set invpaste paste?<CR>
 set pastetoggle=<F2>
@@ -607,3 +607,12 @@ let g:UltiSnipsExpandTrigger="<C-e>"
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Map SneakPrevious to ?, as , is set to <leader>
 nmap ? <Plug>SneakPrevious
+
+" => YankRing(Not used anymore)
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" nnoremap <silent> <F3> :YRShow<CR>
+" inoremap <silent> <F3> <ESC>:YRShow<CR>
+
+" => AckVim
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+nnoremap <leader>a :Ack
