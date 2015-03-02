@@ -117,9 +117,13 @@ filetype indent on
 set autoread
 
 " No annoying sound on errors
-set noerrorbells
-set novisualbell
-set t_vb=
+set noerrorbells visualbell t_vb=
+if has('autocmd')
+  autocmd GUIEnter * set visualbell t_vb=
+endif
+
+" Timeout length at 500ms
+" TODO: Try decreasing it
 set tm=500
 
 " Enable syntax highlight
@@ -588,8 +592,8 @@ let NERDTreeHijackNetrw = 1
 " When running :UltiSnipsEdit, open a new panel split in vertical
 let g:UltiSnipsEditSplit="vertical"
 
-" As I have defined <Tab> as completion, use Shift+Down to expand the snippet
-let g:UltiSnipsExpandTrigger="<S-Down>"
+" As I have defined <Tab> as completion, use Ctrl+e to expand the snippet
+let g:UltiSnipsExpandTrigger="<C-e>"
 
 " => VimSneak
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
