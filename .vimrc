@@ -1,91 +1,86 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Vundle call
+" => VimPlug call
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
-" Set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-
-" Vundle required call
-Plugin 'gmarik/Vundle.vim'
+call plug#begin('~/.vim/plugged')
 
 " => Personal plugins
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " NERDTree
-Plugin 'scrooloose/nerdtree'
+Plug 'scrooloose/nerdtree'
 
 " Vim-Airline
-Plugin 'bling/vim-airline'
+Plug 'bling/vim-airline'
 
 " CtrlP
-Plugin 'kien/ctrlp.vim'
+Plug 'kien/ctrlp.vim'
 
 " Tagbar
-Plugin 'majutsushi/tagbar'
+Plug 'majutsushi/tagbar'
 
 " Vim-surround
-Plugin 'tpope/vim-surround'
+Plug 'tpope/vim-surround'
 
 " Syntastic
-Plugin 'scrooloose/syntastic'
+Plug 'scrooloose/syntastic'
 
 " Vim-markdown
-Plugin 'tpope/vim-markdown'
+Plug 'tpope/vim-markdown'
 
 " Vim-markdown-folding
-Plugin 'nelstrom/vim-markdown-folding'
+Plug 'nelstrom/vim-markdown-folding'
 
 " MRU (Most Recently Used)
-Plugin 'yegappan/mru'
+Plug 'yegappan/mru'
 
 " JSON syntax-highlight
-Plugin 'elzr/vim-json'
+Plug 'elzr/vim-json'
 
 " Peaksea colorscheme
-Plugin 'vim-scripts/peaksea'
+Plug 'vim-scripts/peaksea'
 
 " ACK
-Plugin 'mileszs/ack.vim'
+Plug 'mileszs/ack.vim'
 
 " FuGITive
-Plugin 'tpope/vim-fugitive'
+Plug 'tpope/vim-fugitive'
 
 " AutoClose
-Plugin 'Townk/vim-autoclose'
+Plug 'Townk/vim-autoclose'
 
 " UltiSnips
-Plugin 'SirVer/ultisnips'
+Plug 'SirVer/ultisnips'
 
 " Vim-Sneak
-Plugin 'justinmk/vim-sneak'
+Plug 'justinmk/vim-sneak'
 
 " Clever-f (f F improved)
-Plugin 'rhysd/clever-f.vim'
+Plug 'rhysd/clever-f.vim'
 
-" YankRing (Not used anymore)
-" Plugin 'vim-scripts/YankRing.vim'
-
-
-call vundle#end()            " required
-filetype plugin indent on    " required
+call plug#end()       " required
+filetype indent on    " required
 
 
-" => How to use Vundle
+" => How to use VimPlug
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Installing plugins (requires restarting vim/re-sourcing .vimrc)
-" :PluginInstall
+" :PlugInstall
 
 " Updating plugins
-" :PluginInstall!
-" or
-" :PluginUpdate
+" :PlugUpdate
 
 " Removing plugins
-" :PluginClean
+" :PlugClean
+"
+" Upgrade VimPlug
+" :PlugUpgrade
+"
+" Create plugins snapshot
+" :PlugSnapshot [output path]
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -233,10 +228,10 @@ noremap   <Left>   <NOP>
 noremap   <Right>  <NOP>
 
 " Smart way to move between windows
-map <C-j> <C-W>j
-map <C-k> <C-W>k
-map <C-h> <C-W>h
-map <C-l> <C-W>l
+noremap <C-j> <C-w>j
+noremap <C-h> <C-w>h
+noremap <C-k> <C-w>k
+noremap <C-l> <C-w>l
 
 " After searching, center the cursor
 nnoremap n nzz
