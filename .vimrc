@@ -61,6 +61,7 @@ Plug 'justinmk/vim-sneak'
 " Clever-f (f F improved)
 Plug 'rhysd/clever-f.vim'
 
+
 call plug#end()       " required
 filetype indent on    " required
 
@@ -212,6 +213,11 @@ nmap <leader>w :w!<cr>
 " Opens a vertical split and switches over (\v)
 nnoremap <leader>v <C-w>v<C-w>l
 
+" New tab
+nnoremap <C-t>n :tabnew<CR>
+
+" GoToMark changed to º for Spanish Keyboard
+nnoremap º `
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Motion
@@ -229,7 +235,7 @@ noremap   <Right>  <NOP>
 
 " Smart way to move between windows
 noremap <C-j> <C-w>j
-noremap <C-h> <C-w>h
+noremap <C-h> <C-W>h
 noremap <C-k> <C-w>k
 noremap <C-l> <C-w>l
 
@@ -274,7 +280,7 @@ if has("gui_running")
     set background=dark
     colorscheme desert
 "    colorscheme peaksea
-    let g:colors_name="desert"
+    let g:colors_name="monokai"
 else
     colorscheme desert
     let g:colors_name="desert"
@@ -296,8 +302,6 @@ set laststatus=2
 
 " Format the status line
 set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l
-
-
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Utilities
@@ -558,6 +562,7 @@ map <c-b> :CtrlPBuffer<cr>
 
 let g:ctrlp_max_height = 20
 let g:ctrlp_custom_ignore = 'node_modules\|^\.DS_Store\|^\.git\|^\.coffee'
+let g:ctrlp_user_command = ['.git/', 'git ls-files --cached --others  --exclude-standard %s']
 
 
 " => Airline
@@ -610,4 +615,5 @@ nmap ? <Plug>SneakPrevious
 
 " => AckVim
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-nnoremap <leader>a :Ack
+nnoremap <leader>a :Ack<SPACE>
+let g:ackprg = 'ag --vimgrep'
