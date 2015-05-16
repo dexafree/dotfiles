@@ -61,6 +61,14 @@ Plug 'justinmk/vim-sneak'
 " Clever-f (f F improved)
 Plug 'rhysd/clever-f.vim'
 
+" Swift syntax
+Plug 'Keithbsmiley/swift.vim'
+
+" Multiple cursors
+" Plug 'terryma/vim-multiple-cursors'
+
+" Rust syntax
+Plug 'rust-lang/rust.vim'
 
 call plug#end()       " required
 filetype indent on    " required
@@ -87,6 +95,8 @@ filetype indent on    " required
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" let g:python_host_prog = "/usr/local/bin/python2.7"
 
 " Set , as leader
 let mapleader = ","
@@ -342,7 +352,8 @@ nnoremap <silent> <leader>/ :execute 'vimgrep /'.@/.'/g %'<CR>:copen<CR>
 set dictionary+=/Users/Carlos/.vim/dict.txt
 
 " Automatically change current directory to that of the file in the buffer
-autocmd BufEnter * cd %:p:h
+" autocmd BufEnter * cd %:p:h
+autocmd BufEnter * if @% !~ "^term" | cd %:p:h | endif
 
 " Return to last edit position when opening files (You want this!)
 autocmd BufReadPost *
@@ -356,6 +367,22 @@ autocmd BufReadPost *
 
 " Set Markdown H1 title
 nnoremap <leader>1 yypVr=
+
+" Convert to Markdown H2 title
+nnoremap <leader>#2 0i## <ESC>
+
+" Convert to Markdown H3 title
+nnoremap <leader>#3 0i### <ESC>
+
+" Convert to Markdown H4 title
+nnoremap <leader>#4 0i#### <ESC>
+
+" Convert to Markdown H5 title
+nnoremap <leader>#5 0i##### <ESC>
+
+" Convert to Markdown H6 title
+nnoremap <leader>#6 0i###### <ESC>
+
 
 " => Visual mode related
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -511,9 +538,10 @@ set tabline=%!CustomizedTabLine()
 
 " Add current time to airline, next to file encoding
 function! AirlineInit()
-    let g:airline_section_y = airline#section#create(['ffenc', ' %{strftime("%H:%M")}'])
+    let g:airline_section_y = airline#section#create(['ffenc', ' %{strftime("%H:%M")}  %{system("cat ~/.battery")}'])
 endfunction
 autocmd VimEnter * call AirlineInit()
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => FileTypes
@@ -607,11 +635,6 @@ let g:UltiSnipsExpandTrigger="<C-e>"
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Map SneakPrevious to ?, as , is set to <leader>
 nmap ? <Plug>SneakPrevious
-
-" => YankRing(Not used anymore)
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" nnoremap <silent> <F3> :YRShow<CR>
-" inoremap <silent> <F3> <ESC>:YRShow<CR>
 
 " => AckVim
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
