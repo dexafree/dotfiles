@@ -229,6 +229,9 @@ nnoremap <C-t>n :tabnew<CR>
 " GoToMark changed to º for Spanish Keyboard
 nnoremap º `
 
+" Re-indent buffer
+nnoremap <leader>i migg=G`i
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Motion
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
