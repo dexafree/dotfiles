@@ -171,6 +171,9 @@ set si
 " Wrap lines
 set wrap
 
+" Map j and k to go one line down/up even in wrapped lines
+nnoremap j gj
+nnoremap k gk
 
 " => Command line
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
