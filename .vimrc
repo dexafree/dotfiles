@@ -144,6 +144,10 @@ syntax enable
 " Set system clipboard
 set clipboard=unnamed
 
+" Prevent Vim from clearing the scrollback buffer
+" http://www.shallowsky.com/linux/noaltscreen.html
+set t_ti= t_te=
+
 
 " => Text, tab and indent related
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -234,6 +238,10 @@ nnoremap º `
 
 " Re-indent buffer
 nnoremap <leader>i migg=G`i
+
+" Toggle current and alternate buffers
+nnoremap <leader><leader> <c-^>
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Motion
