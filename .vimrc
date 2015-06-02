@@ -70,6 +70,10 @@ Plug 'Keithbsmiley/swift.vim'
 " Rust syntax
 Plug 'rust-lang/rust.vim'
 
+" Gundo
+Plug 'simnalamburt/vim-mundo'
+
+
 call plug#end()       " required
 filetype indent on    " required
 
@@ -220,6 +224,10 @@ set backup
 " Dirty tweak to prevent swap-files errors
 set directory=.,$TEMP
 
+" => Undo
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set undofile
+set undodir=~/.vim/undo
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Basic bindings
@@ -240,7 +248,7 @@ nnoremap º `
 nnoremap <leader>i migg=G`i
 
 " Toggle current and alternate buffers
-nnoremap <leader><leader> <c-^>
+nnoremap <leader><leader> :bn<CR>
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -557,6 +565,23 @@ endfunction
 autocmd VimEnter * call AirlineInit()
 
 
+" F8 to switch between hex and binary
+noremap <F8> :call HexMe()<CR>
+
+let $in_hex=0
+function HexMe()
+    set binary
+    set noeol
+    if $in_hex>0
+        :%!xxd -r
+        let $in_hex=0
+    else
+        :%!xxd
+        let $in_hex=1
+    endif
+endfunction
+
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => FileTypes
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -654,3 +679,7 @@ nmap ? <Plug>SneakPrevious
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 nnoremap <leader>a :Ack<SPACE>
 let g:ackprg = 'ag --vimgrep'
+
+" => Gundo
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+nnoremap <F5> :GundoToggle<CR>
