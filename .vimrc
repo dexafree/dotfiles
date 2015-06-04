@@ -71,8 +71,10 @@ Plug 'Keithbsmiley/swift.vim'
 Plug 'rust-lang/rust.vim'
 
 " Gundo
-Plug 'simnalamburt/vim-mundo'
+" Plug 'simnalamburt/vim-mundo'
 
+" UndoTree
+Plug 'mbbill/undotree'
 
 call plug#end()       " required
 filetype indent on    " required
@@ -680,6 +682,6 @@ nmap ? <Plug>SneakPrevious
 nnoremap <leader>a :Ack<SPACE>
 let g:ackprg = 'ag --vimgrep'
 
-" => Gundo
+" => UndoTree
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-nnoremap <F5> :GundoToggle<CR>
+nnoremap <F5> :UndotreeToggle<cr>
