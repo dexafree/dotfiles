@@ -407,6 +407,8 @@ nnoremap <leader>#5 0i##### <ESC>
 " Convert to Markdown H6 title
 nnoremap <leader>#6 0i###### <ESC>
 
+" Map <leader>gf to 'Open file in new split'
+nnoremap <leader>gf :vertical wincmd f<CR>
 
 " => Visual mode related
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -671,6 +673,7 @@ let g:UltiSnipsEditSplit="vertical"
 
 " As I have defined <Tab> as completion, use Ctrl+e to expand the snippet
 let g:UltiSnipsExpandTrigger="<C-e>"
+let g:UltiSnipsSnippetDirectories=["UltiSnips", "ultisnips_my"]
 
 " => VimSneak
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -685,3 +688,11 @@ let g:ackprg = 'ag --vimgrep'
 " => UndoTree
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 nnoremap <F5> :UndotreeToggle<cr>
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => NEOVIM SPECIFIC
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+if has("nvim")
+    " Use ESC for exiting :term
+    :tnoremap <Esc> <C-\><C-n>
+end
