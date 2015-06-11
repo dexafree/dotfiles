@@ -64,17 +64,14 @@ Plug 'rhysd/clever-f.vim'
 " Swift syntax
 Plug 'Keithbsmiley/swift.vim'
 
-" Multiple cursors
-" Plug 'terryma/vim-multiple-cursors'
-
 " Rust syntax
 Plug 'rust-lang/rust.vim'
 
-" Gundo
-" Plug 'simnalamburt/vim-mundo'
-
 " UndoTree
 Plug 'mbbill/undotree'
+
+" Region Expand
+Plug 'terryma/vim-expand-region'
 
 call plug#end()       " required
 filetype indent on    " required
@@ -688,6 +685,12 @@ let g:ackprg = 'ag --vimgrep'
 " => UndoTree
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 nnoremap <F5> :UndotreeToggle<cr>
+
+" => Region Expand
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+vmap v <Plug>(expand_region_expand)
+vmap <C-v> <Plug>(expand_region_shrink)
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => NEOVIM SPECIFIC

@@ -179,6 +179,23 @@ layers configuration."
   (add-hook 'markdown-mode-hook 'outline-minor-mode)
   (evil-define-key 'normal outline-minor-mode-map (kbd "SPC") 'outline-toggle-children)
 
+
+  ;; (defun my-functions/open-scratch-buffer-in-new-split()
+  ;;   "Opens a new vertical split with a scratch buffer on it"
+  ;;   (interactive)
+  ;;   (split-window-horizontally-and-switch)
+  ;;  (switch-to-buffer "*scratch*"))
+
+  (defun my-functions/open-empty-buffer-in-new-split()
+    "Opens a new vertical split with an empty buffer on it"
+    (interactive)
+    (let ((buf (generate-new-buffer "untitled")))
+      (split-window-horizontally-and-switch)
+      (switch-to-buffer buf)))
+
+  ;; C-w n for new split with *scratch*
+  (define-key evil-normal-state-map (kbd "C-w n") 'my-functions/open-empty-buffer-in-new-split)
+
 )
 
 ;; Do not write anything past this comment. This is where Emacs will
