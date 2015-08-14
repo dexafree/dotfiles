@@ -17,16 +17,20 @@
      ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
      ;; <M-m f e R> (Emacs style) to install them.
      ;; ----------------------------------------------------------------
-      auto-completion
+     auto-completion
      ;; better-defaults
      emacs-lisp
+     c-c++
      ;; (git :variables
      ;;      git-gutter-use-fringe t)
-      markdown
-     ;; org
-      shell
-      syntax-checking
-      themes-megapack
+     latex
+     markdown
+     org
+     osx
+     shell
+     syntax-checking
+     themes-megapack
+     my-monokai-theme
      )
    ;; List of additional packages that will be installed wihout being
    ;; wrapped in a layer. If you need some configuration for these
@@ -46,6 +50,10 @@ This function is called at the very startup of Spacemacs initialization
 before layers configuration."
   ;; This setq-default sexp is an exhaustive list of all the supported
   ;; spacemacs settings.
+
+  (add-to-list 'custom-theme-load-path "~/.emacs.d/private/my-monokai-theme/my-monokai-theme/")
+
+
   (setq-default
    ;; Either `vim' or `emacs'. Evil is always enabled but if the variable
    ;; is `emacs' then the `holy-mode' is enabled at startup.
@@ -65,7 +73,8 @@ before layers configuration."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(monokai
+   dotspacemacs-themes '(my-monokai
+                         monokai
                          solarized-light
                          solarized-dark
                          leuven
@@ -169,6 +178,14 @@ layers configuration."
   ;; <leader>SPC -> Clear search highlight
   (evil-leader/set-key "SPC" 'evil-search-highlight-persist-remove-all)
 
+  (defun my-functions/open-dotspacemacs-in-split()
+    (interactive)
+    (split-window-horizontally-and-switch)
+    (find-file "~/.spacemacs"))
+
+  ;; <leader>ev -> Open vertical split and load .spacemacs
+  (evil-leader/set-key (kbd "ev") 'my-functions/open-dotspacemacs-in-split)
+
   ;; H -> Beginning of line
   (define-key evil-normal-state-map (kbd "H") 'evil-beginning-of-line)
 
@@ -195,6 +212,10 @@ layers configuration."
 
   ;; C-w n for new split with *scratch*
   (define-key evil-normal-state-map (kbd "C-w n") 'my-functions/open-empty-buffer-in-new-split)
+  (global-set-key [f8] 'neotree-toggle)
+
+  (setq org-src-fontify-natively t)
+  
 
 )
 
