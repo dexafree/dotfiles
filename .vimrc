@@ -73,6 +73,12 @@ Plug 'mbbill/undotree'
 " Region Expand
 Plug 'terryma/vim-expand-region'
 
+" FZF
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
+
+" Vim-over (visual :%s/a/b/g)
+Plug 'osyo-manga/vim-over'
+
 call plug#end()       " required
 filetype indent on    " required
 
