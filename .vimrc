@@ -79,6 +79,10 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
 " Vim-over (visual :%s/a/b/g)
 Plug 'osyo-manga/vim-over'
 
+" Vim-selecta
+Plug 'michaelavila/selecta.vim'
+
+
 call plug#end()       " required
 filetype indent on    " required
 
@@ -697,6 +701,26 @@ nnoremap <F5> :UndotreeToggle<cr>
 
 vmap v <Plug>(expand_region_expand)
 vmap <C-v> <Plug>(expand_region_shrink)
+
+" => Vim-selecta
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Find all files in all non-dot directories starting in the working directory.
+" Fuzzy select one of those. Open the selected file with :e.
+" nnoremap <leader>e :SelectaFile<cr>
+
+" As above, but will open in a :split
+" nnoremap <leader>s :SelectaSplit<cr>
+
+" As above, but will open in a :vsplit
+" nnoremap <leader>v :SelectaVsplit<cr>
+
+" Find all buffers that have been opened.
+" Fuzzy select one of those. Open the selected file with :b.
+nnoremap <leader>b :SelectaBuffer<cr>
+
+" Find previously run commands.
+" Fuzzy select one of those. Run that command with :
+" nnoremap <leader>h :SelectaHistoryCommand<cr>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => NEOVIM SPECIFIC
