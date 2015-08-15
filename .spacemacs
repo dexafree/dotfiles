@@ -215,7 +215,23 @@ layers configuration."
   (global-set-key [f8] 'neotree-toggle)
 
   (setq org-src-fontify-natively t)
-  
+
+  (defun my-functions/org-insert-source-block(arg)
+    "Inserts a code block in org mode, asking for language"
+    (interactive "p")
+    (setq block-language (read-from-minibuffer "Language: "))
+    (end-of-line)
+    (open-line arg)
+    (insert (concat "#+BEGIN_SRC " block-language ))
+    (open-line arg)
+    (next-line 1)
+    (open-line arg)
+    (next-line 1)
+    (insert "#+END_SRC")
+    (previous-line 1)
+    (org-edit-special))
+
+  (evil-define-key 'normal org-mode-map (kbd "C-c s") 'my-functions/org-insert-source-block)
 
 )
 
