@@ -23,10 +23,13 @@
      c-c++
      ;; (git :variables
      ;;      git-gutter-use-fringe t)
+     haskell
      latex
      markdown
      org
      osx
+     python
+     rust
      shell
      syntax-checking
      themes-megapack
@@ -69,7 +72,7 @@ before layers configuration."
    dotspacemacs-startup-banner 'official
    ;; List of items to show in the startup buffer. If nil it is disabled.
    ;; Possible values are: `recents' `bookmarks' `projects'."
-   dotspacemacs-startup-lists '(recents projects)
+   dotspacemacs-startup-lists '(recents projects bookmarks)
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
@@ -162,6 +165,56 @@ before layers configuration."
  This function is called at the very end of Spacemacs initialization after
 layers configuration."
 
+
+  ;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;;   Helper functions  ;;
+  ;;;;;;;;;;;;;;;;;;;;;;;;;
+
+  (defun my-functions/open-dotspacemacs-in-split()
+    "Opens the /.spacemacs file in a new vertical split"
+    (interactive)
+    (split-window-horizontally-and-switch)
+    (find-file "~/.spacemacs"))
+
+
+  (defun my-functions/open-empty-buffer-in-new-split()
+    "Opens a new vertical split with an empty buffer on it"
+    (interactive)
+    (let ((buf (generate-new-buffer "untitled")))
+      (split-window-horizontally-and-switch)
+      (switch-to-buffer buf)))
+
+
+  (defun my-functions/org-insert-source-block(arg)
+    "Inserts a code block in org mode, asking for language, and then opens a
+     vertical split with syntax-highlight for code editing"
+    (interactive "p")
+    (setq block-language (read-from-minibuffer "Language: "))
+    (end-of-line)
+    (open-line arg)
+    (insert (concat "#+BEGIN_SRC " block-language ))
+    (open-line arg)
+    (next-line 1)
+    (open-line arg)
+    (next-line 1)
+    (insert "#+END_SRC")
+    (previous-line 1)
+    (org-edit-special))
+
+  (defun my-functions/open-help-file ()
+    "Opens my help file in a new vertical split"
+    (interactive)
+    (split-window-horizontally-and-switch)
+    (find-file "~/Home/APUNTES/Otros/my-emacs.org"))
+
+
+  ;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;;          UI         ;;
+  ;;;;;;;;;;;;;;;;;;;;;;;;;
+
+  ;; Make the default separator be the arrow-fade version only if started in GUI mode
+  (if (string-equal window-system "mac") (setq powerline-default-separator 'arrow-fade))
+
   ;; Line numbers enabled by default
   (spacemacs/toggle-line-numbers)
 
@@ -178,11 +231,6 @@ layers configuration."
   ;; <leader>SPC -> Clear search highlight
   (evil-leader/set-key "SPC" 'evil-search-highlight-persist-remove-all)
 
-  (defun my-functions/open-dotspacemacs-in-split()
-    (interactive)
-    (split-window-horizontally-and-switch)
-    (find-file "~/.spacemacs"))
-
   ;; <leader>ev -> Open vertical split and load .spacemacs
   (evil-leader/set-key (kbd "ev") 'my-functions/open-dotspacemacs-in-split)
 
@@ -196,19 +244,8 @@ layers configuration."
   (add-hook 'markdown-mode-hook 'outline-minor-mode)
   (evil-define-key 'normal outline-minor-mode-map (kbd "SPC") 'outline-toggle-children)
 
-
-  ;; (defun my-functions/open-scratch-buffer-in-new-split()
-  ;;   "Opens a new vertical split with a scratch buffer on it"
-  ;;   (interactive)
-  ;;   (split-window-horizontally-and-switch)
-  ;;  (switch-to-buffer "*scratch*"))
-
-  (defun my-functions/open-empty-buffer-in-new-split()
-    "Opens a new vertical split with an empty buffer on it"
-    (interactive)
-    (let ((buf (generate-new-buffer "untitled")))
-      (split-window-horizontally-and-switch)
-      (switch-to-buffer buf)))
+  ;; Org mode SPC to fold-unfold
+  (evil-define-key 'normal org-mode-map (kbd "SPC") 'evil-toggle-fold)
 
   ;; C-w n for new split with *scratch*
   (define-key evil-normal-state-map (kbd "C-w n") 'my-functions/open-empty-buffer-in-new-split)
@@ -216,23 +253,21 @@ layers configuration."
 
   (setq org-src-fontify-natively t)
 
-  (defun my-functions/org-insert-source-block(arg)
-    "Inserts a code block in org mode, asking for language"
-    (interactive "p")
-    (setq block-language (read-from-minibuffer "Language: "))
-    (end-of-line)
-    (open-line arg)
-    (insert (concat "#+BEGIN_SRC " block-language ))
-    (open-line arg)
-    (next-line 1)
-    (open-line arg)
-    (next-line 1)
-    (insert "#+END_SRC")
-    (previous-line 1)
-    (org-edit-special))
-
+  ;; Bind "C-c s" in org mode to insert source block
   (evil-define-key 'normal org-mode-map (kbd "C-c s") 'my-functions/org-insert-source-block)
 
+  ;; Avoid redefinition warnings
+  (setq ad-redefinition-action 'accept)
+
+  ;; Center buffer on search-next
+  (defadvice evil-ex-search-next (after advice-for-evil-ex-search-next activate)
+      (evil-scroll-line-to-center (line-number-at-pos)))
+
+  ;; Bind ' for Go-To-Mark insted of Go-To-Mark-Line
+  (define-key evil-normal-state-map "'" 'evil-goto-mark)
+
+  ;; Bind <leader>hh to open the help file
+  (evil-leader/set-key (kbd "hh") 'my-functions/open-help-file)
 )
 
 ;; Do not write anything past this comment. This is where Emacs will
