@@ -212,10 +212,18 @@ layers configuration."
     "Configures the Powerline separator"
     (setq powerline-default-separator 'arrow-fade))
 
+  (defun my-functions/insert-tilde ()
+    (interactive)
+    (insert "~"))
+
+  (defun my-functions/bind-tilde ()
+    (define-key evil-insert-state-map (kbd "M-ñ") 'my-functions/insert-tilde))
+
 
   (defun my-functions/gui-behaviour ()
     (progn
       (my-functions/set-powerline-arrow)
+      (my-functions/bind-tilde)
       (global-set-key (kbd "s-+") 'spacemacs/scale-up-font)))
 
   ;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -278,6 +286,9 @@ layers configuration."
 
   ;; Bind <leader>hh to open the help file
   (evil-leader/set-key (kbd "hh") 'my-functions/open-help-file)
+
+  ;; In C mode, bind gD to "find tag"
+  (evil-define-key 'normal c-mode-map (kbd "gD") 'find-tag)
 
 )
 
