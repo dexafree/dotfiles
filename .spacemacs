@@ -208,12 +208,22 @@ layers configuration."
     (find-file "~/Home/APUNTES/Otros/my-emacs.org"))
 
 
+  (defun my-functions/set-powerline-arrow ()
+    "Configures the Powerline separator"
+    (setq powerline-default-separator 'arrow-fade))
+
+
+  (defun my-functions/gui-behaviour ()
+    (progn
+      (my-functions/set-powerline-arrow)
+      (global-set-key (kbd "s-+") 'spacemacs/scale-up-font)))
+
   ;;;;;;;;;;;;;;;;;;;;;;;;;
   ;;          UI         ;;
   ;;;;;;;;;;;;;;;;;;;;;;;;;
 
-  ;; Make the default separator be the arrow-fade version only if started in GUI mode
-  (if (string-equal window-system "mac") (setq powerline-default-separator 'arrow-fade))
+  ;; Run the functions defined for GUI version
+  (if (string-equal window-system "mac") (my-functions/gui-behaviour))
 
   ;; Line numbers enabled by default
   (spacemacs/toggle-line-numbers)
@@ -268,6 +278,7 @@ layers configuration."
 
   ;; Bind <leader>hh to open the help file
   (evil-leader/set-key (kbd "hh") 'my-functions/open-help-file)
+
 )
 
 ;; Do not write anything past this comment. This is where Emacs will
