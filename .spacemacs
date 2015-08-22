@@ -27,7 +27,7 @@
      latex
      markdown
      org
-     osx
+     (osx :variables osx-use-option-as-meta nil) ;; Needed for GUI `⌥`
      python
      rust
      shell
@@ -165,6 +165,14 @@ before layers configuration."
  This function is called at the very end of Spacemacs initialization after
 layers configuration."
 
+  ;; (set-language-environment "Spanish")
+  ;; UTF-8 please
+  (setq locale-coding-system 'utf-8) ; pretty
+  (set-terminal-coding-system 'utf-8) ; pretty
+  (set-keyboard-coding-system 'utf-8) ; pretty
+  (set-selection-coding-system 'utf-8) ; please
+  (prefer-coding-system 'utf-8) ; with sugar on top
+  (set-language-environment 'utf-8)
 
   ;;;;;;;;;;;;;;;;;;;;;;;;;
   ;;   Helper functions  ;;
@@ -212,18 +220,13 @@ layers configuration."
     "Configures the Powerline separator"
     (setq powerline-default-separator 'arrow-fade))
 
-  (defun my-functions/insert-tilde ()
-    (interactive)
-    (insert "~"))
-
-  (defun my-functions/bind-tilde ()
-    (define-key evil-insert-state-map (kbd "M-ñ") 'my-functions/insert-tilde))
-
+  (defun my-functions/full-screen ()
+    (toggle-fullscreen))
 
   (defun my-functions/gui-behaviour ()
     (progn
       (my-functions/set-powerline-arrow)
-      (my-functions/bind-tilde)
+      (my-functions/full-screen)
       (global-set-key (kbd "s-+") 'spacemacs/scale-up-font)))
 
   ;;;;;;;;;;;;;;;;;;;;;;;;;
