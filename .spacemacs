@@ -229,6 +229,17 @@ layers configuration."
       (my-functions/full-screen)
       (global-set-key (kbd "s-+") 'spacemacs/scale-up-font)))
 
+  (defun my-functions/new-note ()
+    (interactive)
+    (let ((starting (format-time-string "%Y-%m-%d")))
+      (setq subject (upcase (read-from-minibuffer "Assignatura: ")))
+      (setq name (read-from-minibuffer "Nom: "))
+      (setq filename (concat "~/Dropbox/2015-2016/APUNTES/" subject "/" starting "-" name ".org"))
+      (split-window-horizontally-and-switch)
+      (find-file filename)
+      (setq current-hour (format-time-string "%H:%M:%S"))
+      (insert (concat "---\nlayout: post\ntitle: \"" name "\"\ndate: " current-hour "\ncategory: " subject "\n---\n* 1. "name "\n"))))
+
   ;;;;;;;;;;;;;;;;;;;;;;;;;
   ;;          UI         ;;
   ;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -270,6 +281,8 @@ layers configuration."
 
   ;; C-w n for new split with *scratch*
   (define-key evil-normal-state-map (kbd "C-w n") 'my-functions/open-empty-buffer-in-new-split)
+
+  ;; Bind F8 to open neotree
   (global-set-key [f8] 'neotree-toggle)
 
   (setq org-src-fontify-natively t)
@@ -292,6 +305,9 @@ layers configuration."
 
   ;; In C mode, bind gD to "find tag"
   (evil-define-key 'normal c-mode-map (kbd "gD") 'find-tag)
+
+  ;; Bind C-c C-a C-n to "Create new note"
+  (define-key evil-normal-state-map (kbd "C-c C-a C-n") 'my-functions/new-note)
 
 )
 
