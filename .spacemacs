@@ -27,7 +27,8 @@
      latex
      markdown
      org
-     (osx :variables osx-use-option-as-meta nil) ;; Needed for GUI `⌥`
+     (osx :variables
+          osx-use-option-as-meta nil) ;; Needed for GUI `⌥`
      python
      rust
      shell
@@ -165,7 +166,13 @@ before layers configuration."
  This function is called at the very end of Spacemacs initialization after
 layers configuration."
 
-  ;; (set-language-environment "Spanish")
+  ;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;;       Locale        ;;
+  ;;;;;;;;;;;;;;;;;;;;;;;;;
+
+  ;; Make the org calendar start on monday
+  (setq calendar-week-start-day 1)
+
   ;; UTF-8 please
   (setq locale-coding-system 'utf-8) ; pretty
   (set-terminal-coding-system 'utf-8) ; pretty
@@ -173,6 +180,17 @@ layers configuration."
   (set-selection-coding-system 'utf-8) ; please
   (prefer-coding-system 'utf-8) ; with sugar on top
   (set-language-environment 'utf-8)
+
+  ;; Make the command key behave as Meta
+  (setq mac-command-key-is-meta t)
+
+  ;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;;        Utils        ;;
+  ;;;;;;;;;;;;;;;;;;;;;;;;;
+
+  ;; Sets the auto-save interval to 30 seconds or 300 characters
+  (setq auto-save-interval 300)
+  (setq auto-save-timeout 30)
 
   ;;;;;;;;;;;;;;;;;;;;;;;;;
   ;;   Helper functions  ;;
@@ -227,7 +245,11 @@ layers configuration."
     (progn
       (my-functions/set-powerline-arrow)
       (my-functions/full-screen)
-      (global-set-key (kbd "s-+") 'spacemacs/scale-up-font)))
+      (global-set-key (kbd "M-+") 'spacemacs/scale-up-font)
+      (global-set-key (kbd "M--") 'spacemacs/scale-down-font)
+      (global-set-key (kbd "M-v") 'yank)
+      (setq mac-command-modifier 'meta)))
+
 
   (defun my-functions/new-note ()
     (interactive)
@@ -252,6 +274,18 @@ layers configuration."
 
   ;; Add little margin between line number and text
   (setq linum-format "%d ")
+
+  ;; Add the current battery status to powerline
+  (spacemacs/toggle-mode-line-battery)
+
+  ;; Format the display time structure (Show HH:mm and not show the system load average)
+  (setq display-time-format "%H:%M")
+  (setq display-time-default-load-average nil)
+
+
+  ;; Show the current time at the powerline
+  (display-time-mode)
+
 
   ;;;;;;;;;;;;;;;;;;;;;;;;;
   ;;     Key bindings    ;;
@@ -308,6 +342,12 @@ layers configuration."
 
   ;; Bind C-c C-a C-n to "Create new note"
   (define-key evil-normal-state-map (kbd "C-c C-a C-n") 'my-functions/new-note)
+
+  ;; Bind <leader>$ to multi-term
+  (evil-leader/set-key (kbd "$") 'multi-term)
+
+  ;; In ORG mode, bind <leader>ol to generate LaTeX images
+  (evil-leader/set-key (kbd "ol") 'org-preview-latex-fragment)
 
 )
 
