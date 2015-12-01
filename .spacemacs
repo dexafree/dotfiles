@@ -24,6 +24,7 @@
      ;; (git :variables
      ;;      git-gutter-use-fringe t)
      haskell
+     html
      latex
      markdown
      org
@@ -40,9 +41,9 @@
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages then consider to create a layer, you can also put the
    ;; configuration in `dotspacemacs/config'.
-   dotspacemacs-additional-packages '()
+   dotspacemacs-additional-packages '(coffee-mode)
    ;; A list of packages and/or extensions that will not be install and loaded.
-   dotspacemacs-excluded-packages '()
+   dotspacemacs-excluded-packages '(toxi-theme)
    ;; If non-nil spacemacs will delete any orphan packages, i.e. packages that
    ;; are declared in a layer which is not a member of
    ;; the list `dotspacemacs-configuration-layers'
@@ -188,18 +189,35 @@ layers configuration."
   ;;        Utils        ;;
   ;;;;;;;;;;;;;;;;;;;;;;;;;
 
-  ;; Sets the auto-save interval to 30 seconds or 300 characters
+  ;; Sets the auto-save interval to 180 seconds or 300 characters
   (setq auto-save-interval 300)
-  (setq auto-save-timeout 30)
+  (setq auto-save-timeout 180)
+
+  ;; Restore the current command echo rate
+  (setq echo-keystrokes .1)
+
+
+  ;; Make emacs follow directly any symlink
+  (setq vc-follow-symlinks t)
+
+  ;; Manually set Rust src path, as it looks like it's not able to detect it
+  (add-hook 'rust-mode-hook (lambda () (interactive)
+                              (setq company-racer-rust-src "~/Home/SDKs/rust/src")))
+
+  (add-hook 'flycheck-mode-hook (lambda () (evil-leader/set-key (kbd "ev") 'my-functions/open-dotspacemacs-in-split)))
 
   ;;;;;;;;;;;;;;;;;;;;;;;;;
   ;;   Helper functions  ;;
   ;;;;;;;;;;;;;;;;;;;;;;;;;
+  (defun my-functions/split-window-horizontally-and-switch ()
+    (interactive)
+    (split-window-horizontally)
+    (other-window 1))
 
   (defun my-functions/open-dotspacemacs-in-split()
     "Opens the /.spacemacs file in a new vertical split"
     (interactive)
-    (split-window-horizontally-and-switch)
+    (my-functions/split-window-horizontally-and-switch)
     (find-file "~/.spacemacs"))
 
 
@@ -207,7 +225,7 @@ layers configuration."
     "Opens a new vertical split with an empty buffer on it"
     (interactive)
     (let ((buf (generate-new-buffer "untitled")))
-      (split-window-horizontally-and-switch)
+      (my-functions/split-window-horizontally-and-switch)
       (switch-to-buffer buf)))
 
 
@@ -230,7 +248,7 @@ layers configuration."
   (defun my-functions/open-help-file ()
     "Opens my help file in a new vertical split"
     (interactive)
-    (split-window-horizontally-and-switch)
+    (my-functions/split-window-horizontally-and-switch)
     (find-file "~/Home/APUNTES/Otros/my-emacs.org"))
 
 
@@ -239,7 +257,8 @@ layers configuration."
     (setq powerline-default-separator 'arrow-fade))
 
   (defun my-functions/full-screen ()
-    (toggle-fullscreen))
+    (toggle-frame-fullscreen))
+
 
   (defun my-functions/gui-behaviour ()
     (progn
@@ -257,10 +276,10 @@ layers configuration."
       (setq subject (upcase (read-from-minibuffer "Assignatura: ")))
       (setq name (read-from-minibuffer "Nom: "))
       (setq filename (concat "~/Dropbox/2015-2016/APUNTES/" subject "/" starting "-" name ".org"))
-      (split-window-horizontally-and-switch)
+      (my-functions/split-window-horizontally-and-switch)
       (find-file filename)
       (setq current-hour (format-time-string "%H:%M:%S"))
-      (insert (concat "---\nlayout: post\ntitle: \"" name "\"\ndate: " current-hour "\ncategory: " subject "\n---\n* 1. "name "\n"))))
+      (insert (concat "---\nlayout: post\ntitle: \"" name "\"\ndate: " starting " " current-hour "\ncategory: " subject "\n---\n* 1. "name "\n"))))
 
   ;;;;;;;;;;;;;;;;;;;;;;;;;
   ;;          UI         ;;
@@ -308,7 +327,7 @@ layers configuration."
 
   ;; Markdown SPC to fold-unfold
   (add-hook 'markdown-mode-hook 'outline-minor-mode)
-  (evil-define-key 'normal outline-minor-mode-map (kbd "SPC") 'outline-toggle-children)
+  (evil-define-key 'normal markdown-mode-map (kbd "SPC") 'evil-toggle-fold)
 
   ;; Org mode SPC to fold-unfold
   (evil-define-key 'normal org-mode-map (kbd "SPC") 'evil-toggle-fold)
@@ -349,7 +368,33 @@ layers configuration."
   ;; In ORG mode, bind <leader>ol to generate LaTeX images
   (evil-leader/set-key (kbd "ol") 'org-preview-latex-fragment)
 
+  ;; AutoComplete delay
+  (setq ac-delay 0.2)
+
+  ;; Show line numbers by default
+  (spacemacs/toggle-line-numbers-on)
+
+  ;; Remap y$ to Y
+  (setq dotspacemacs-remap-Y-to-y$ nil)
+
+  ;; Set the insert cursor to bar
+  (setq-default evil-insert-state-cursor 'bar)
 )
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(org-agenda-files
+   (quote
+    ("~/org/TODOS.org" "~/Home/TEMP/org/tutorial/tutorial.org"))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(company-tooltip-common ((t (:inherit company-tooltip :weight bold :underline nil))))
+ '(company-tooltip-common-selection ((t (:inherit company-tooltip-selection :weight bold :underline nil)))))

@@ -82,6 +82,8 @@ Plug 'osyo-manga/vim-over'
 " Vim-selecta
 Plug 'michaelavila/selecta.vim'
 
+" Follow My Lead
+Plug 'ktonga/vim-follow-my-lead'
 
 call plug#end()       " required
 filetype indent on    " required
@@ -416,6 +418,48 @@ nnoremap <leader>#6 0i###### <ESC>
 
 " Map <leader>gf to 'Open file in new split'
 nnoremap <leader>gf :vertical wincmd f<CR>
+
+
+"" Snippet that makes every new buffer be a scratch buffer, unless it's loaded with :e
+"" SOURCE: https://www.reddit.com/r/vim/comments/3dk4ng/a_little_treat_for_everyone/
+
+function! IsFile()
+    return expand('%') != ""
+endfunction
+
+function! IsVimInternalBuffer()
+    let l:internalbufs = ["quickfix","help","directory","terminal"]
+    for i in internalbufs
+        if &buftype == i
+            return 1
+        endif
+    endfor
+    return 0
+endfunction
+
+function! SetBuftype()
+    if IsVimInternalBuffer()
+        return
+    endif
+    if IsFile()
+        set buftype=
+    else
+        set buftype=nofile
+    endif
+endfunction
+
+function! CopyScratch()
+    if !IsFile()
+        normal! gg"+yG
+    endif
+endfunction
+
+augroup set_buftype
+    autocmd!
+    autocmd BufEnter * call SetBuftype()
+    autocmd BufFilePost * call SetBuftype()
+    autocmd BufWritePost * set buftype=
+augroup END
 
 " => Visual mode related
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
