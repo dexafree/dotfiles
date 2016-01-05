@@ -289,7 +289,9 @@ layers configuration."
   (if (string-equal window-system "mac") (my-functions/gui-behaviour))
 
   ;; Line numbers enabled by default
-  (spacemacs/toggle-line-numbers)
+  (setq dotspacemacs-line-numbers t)
+
+  (setq dotspacemacs-leader-key ",")
 
   ;; Add little margin between line number and text
   (setq linum-format "%d ")
