@@ -16,6 +16,9 @@ Plug 'scrooloose/nerdtree'
 " Vim-Airline
 Plug 'bling/vim-airline'
 
+" Vim-Airline themes
+Plug 'vim-airline/vim-airline-themes'
+
 " CtrlP
 Plug 'kien/ctrlp.vim'
 
@@ -251,6 +254,8 @@ nnoremap <leader>v <C-w>v<C-w>l
 
 " New tab
 nnoremap <C-t>n :tabnew<CR>
+
+nnoremap <C-t>t :tabn<CR>
 
 " GoToMark changed to º for Spanish Keyboard
 nnoremap º `

@@ -20,7 +20,8 @@
      auto-completion
      ;; better-defaults
      emacs-lisp
-     c-c++
+     (c-c++ :variables
+            c-c++-enable-clang-support t)
      ;; (git :variables
      ;;      git-gutter-use-fringe t)
      haskell
@@ -158,6 +159,8 @@ before layers configuration."
    ;; specified with an installed package.
    ;; Not used for now.
    dotspacemacs-default-package-repository nil
+
+   dotspacemacs-line-numbers t
    )
   ;; User initialization goes here
   )
@@ -289,7 +292,7 @@ layers configuration."
   (if (string-equal window-system "mac") (my-functions/gui-behaviour))
 
   ;; Line numbers enabled by default
-  (setq dotspacemacs-line-numbers t)
+  ;; (setq dotspacemacs-line-numbers t)
 
   (setq dotspacemacs-leader-key ",")
 
@@ -330,6 +333,9 @@ layers configuration."
   ;; Markdown SPC to fold-unfold
   (add-hook 'markdown-mode-hook 'outline-minor-mode)
   (evil-define-key 'normal markdown-mode-map (kbd "SPC") 'evil-toggle-fold)
+
+  ;; C mode: hook to autocomplete
+  (add-hook 'c-mode-hook 'auto-complete-mode)
 
   ;; Org mode SPC to fold-unfold
   (evil-define-key 'normal org-mode-map (kbd "SPC") 'evil-toggle-fold)
