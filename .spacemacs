@@ -33,6 +33,7 @@
           osx-use-option-as-meta nil) ;; Needed for GUI `⌥`
      python
      rust
+     react
      shell
      syntax-checking
      themes-megapack
@@ -387,6 +388,11 @@ layers configuration."
 
   ;; Set the insert cursor to bar
   (setq-default evil-insert-state-cursor 'bar)
+
+  (eval-after-load "flyspell"
+    '(progn
+       (define-key flyspell-mouse-map [down-mouse-3] #'flyspell-correct-word)
+       (define-key flyspell-mouse-map [mouse-3] #'undefined)))
 )
 
 ;; Do not write anything past this comment. This is where Emacs will

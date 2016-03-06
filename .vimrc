@@ -10,6 +10,13 @@ call plug#begin('~/.vim/plugged')
 " => Personal plugins
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+" YouCompleteMe
+" Plug 'Valloric/YouCompleteMe'
+" Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
+
+" Deoplete
+Plug 'Shougo/deoplete.nvim'
+
 " NERDTree
 Plug 'scrooloose/nerdtree'
 
@@ -113,7 +120,7 @@ filetype indent on    " required
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
+set shell=/bin/zsh
 " let g:python_host_prog = "/usr/local/bin/python2.7"
 
 " Set , as leader
@@ -777,4 +784,6 @@ nnoremap <leader>b :SelectaBuffer<cr>
 if has("nvim")
     " Use ESC for exiting :term
     :tnoremap <Esc> <C-\><C-n>
+    let g:deoplete#enable_at_startup = 1
 end
+
