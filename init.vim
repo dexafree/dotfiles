@@ -5,7 +5,7 @@
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
-call plug#begin('~/.vim/plugged')
+call plug#begin('~/.config/nvim/plugged')
 
 " => Personal plugins
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -13,9 +13,6 @@ call plug#begin('~/.vim/plugged')
 " YouCompleteMe
 " Plug 'Valloric/YouCompleteMe'
 " Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
-
-" Deoplete
-Plug 'Shougo/deoplete.nvim'
 
 " NERDTree
 Plug 'scrooloose/nerdtree'
@@ -490,17 +487,6 @@ vnoremap $$ <esc>`>a"<esc>`<i"<esc>
 vnoremap $q <esc>`>a'<esc>`<i'<esc>
 vnoremap $e <esc>`>a"<esc>`<i"<esc>
 
-" Map auto complete of (, ", ', [
-inoremap $1 ()<esc>i
-inoremap $2 []<esc>i
-inoremap $3 {}<esc>i
-inoremap $4 {<esc>o}<esc>O
-inoremap $q ''<esc>i
-inoremap $e ""<esc>i
-inoremap $t <><esc>i
-
-
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Search
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -784,6 +770,5 @@ nnoremap <leader>b :SelectaBuffer<cr>
 if has("nvim")
     " Use ESC for exiting :term
     :tnoremap <Esc> <C-\><C-n>
-    let g:deoplete#enable_at_startup = 1
 end
 
