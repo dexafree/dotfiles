@@ -22,8 +22,8 @@
      emacs-lisp
      (c-c++ :variables
             c-c++-enable-clang-support t)
-     ;; (git :variables
-     ;;      git-gutter-use-fringe t)
+     (git :variables
+          git-gutter-use-fringe t)
      haskell
      html
      latex
@@ -43,7 +43,7 @@
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages then consider to create a layer, you can also put the
    ;; configuration in `dotspacemacs/config'.
-   dotspacemacs-additional-packages '(coffee-mode)
+   dotspacemacs-additional-packages '(coffee-mode mips-mode)
    ;; A list of packages and/or extensions that will not be install and loaded.
    dotspacemacs-excluded-packages '(toxi-theme)
    ;; If non-nil spacemacs will delete any orphan packages, i.e. packages that
@@ -258,7 +258,9 @@ layers configuration."
 
   (defun my-functions/set-powerline-arrow ()
     "Configures the Powerline separator"
-    (setq powerline-default-separator 'arrow-fade))
+    (progn
+      (setq powerline-default-separator 'arrow-fade)
+      (spaceline-compile)))
 
   (defun my-functions/full-screen ()
     (toggle-frame-fullscreen))
@@ -404,11 +406,13 @@ layers configuration."
  ;; If there is more than one, they won't work right.
  '(org-agenda-files
    (quote
-    ("~/org/TODOS.org" "~/Home/TEMP/org/tutorial/tutorial.org"))))
+    ("~/org/TODOS.org" "~/Home/TEMP/org/tutorial/tutorial.org")))
+ '(package-selected-packages
+   (quote
+    (smeargle orgit org magit-gitflow helm-gitignore gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link evil-magit magit magit-popup git-commit with-editor pug-mode spinner hide-comnt haml-mode seq autothemer bind-map highlight undo-tree mips-mode yapfify uuidgen request py-isort osx-dictionary org-projectile org-download livid-mode skewer-mode simple-httpd live-py-mode link-hint intero hlint-refactor helm-hoogle eyebrowse evil-visual-mark-mode evil-unimpaired evil-ediff eshell-z dumb-jump darkokai-theme company-ghci column-enforce-mode cargo zenburn-theme xterm-color ws-butler window-numbering web-mode ujelly-theme twilight-anti-bright-theme toml-mode toc-org tao-theme spacemacs-theme spaceline powerline racer rust-mode py-yapf planet-theme pip-requirements persp-mode organic-green-theme org-pomodoro alert org-plus-contrib open-junk-file omtose-phellack-theme neotree naquadah-theme multi-term move-text monokai-theme moe-theme material-theme markdown-toc markdown-mode majapahit-theme macrostep leuven-theme less-css-mode json-mode js2-refactor multiple-cursors js2-mode js-doc jazz-theme info+ indent-guide hl-todo hindent highlight-numbers help-fns+ helm-themes helm-swoop helm-pydoc helm-projectile helm-make projectile helm-descbinds helm-c-yasnippet helm-ag haskell-snippets gruvbox-theme grandshell-theme gotham-theme google-translate flycheck-rust flatui-theme farmhouse-theme expand-region exec-path-from-shell evil-surround evil-search-highlight-persist evil-mc evil-matchit evil-iedit-state iedit evil-exchange eshell-prompt-extras emmet-mode dracula-theme darktooth-theme cyberpunk-theme company-tern tern company-racer company-quickhelp company-anaconda color-theme-sanityinc-tomorrow coffee-mode cmake-mode clang-format badwolf-theme auto-yasnippet auto-compile apropospriate-theme anti-zenburn-theme anaconda-mode ample-theme ace-window ace-link ace-jump-helm-line avy auto-complete auctex yasnippet ghc anzu smartparens haskell-mode flycheck company helm helm-core popup async hydra f dash s quelpa package-build use-package which-key evil zonokai-theme zen-and-art-theme web-beautify volatile-highlights vi-tilde-fringe underwater-theme twilight-theme twilight-bright-theme tronesque-theme tangotango-theme tango-plus-theme tango-2-theme tagedit sunny-day-theme sublime-themes subatomic256-theme subatomic-theme stekene-theme spacegray-theme soothe-theme soft-stone-theme soft-morning-theme soft-charcoal-theme smyx-theme smooth-scrolling slim-mode shm shell-pop seti-theme scss-mode sass-mode reverse-theme reveal-in-osx-finder restart-emacs rainbow-delimiters railscasts-theme pyvenv pytest pyenv-mode purple-haze-theme professional-theme popwin pkg-info phoenix-dark-pink-theme phoenix-dark-mono-theme pcre2el pbcopy pastels-on-dark-theme parent-mode paradox page-break-lines packed osx-trash org-repo-todo org-present org-bullets oldlace-theme occidental-theme obsidian-theme noctilux-theme niflheim-theme mustang-theme monochrome-theme molokai-theme mmm-mode minimal-theme lush-theme lorem-ipsum log4e linum-relative light-soap-theme launchctl json-snatcher json-reformat jbeans-theme jade-mode ir-black-theme inkpot-theme ido-vertical-mode hy-mode hungry-delete htmlize highlight-parentheses highlight-indentation heroku-theme hemisu-theme helm-mode-manager helm-flx helm-css-scss helm-company hc-zenburn-theme gruber-darker-theme goto-chg golden-ratio gnuplot gntp gh-md gandalf-theme flycheck-pos-tip flycheck-haskell flx-ido flatland-theme firebelly-theme fill-column-indicator fancy-battery evil-visualstar evil-tutor evil-numbers evil-nerd-commenter evil-lisp-state evil-indent-plus evil-escape evil-args evil-anzu eval-sexp-fu espresso-theme esh-help elisp-slime-nav django-theme disaster diminish define-word deferred dash-functional darkmine-theme darkburn-theme dakrone-theme cython-mode company-web company-statistics company-ghc company-cabal company-c-headers company-auctex colorsarenice-theme color-theme-sanityinc-solarized cmm-mode clues-theme clean-aindent-mode cherry-blossom-theme busybee-theme buffer-move bubbleberry-theme bracketed-paste birds-of-paradise-plus-theme bind-key auto-highlight-symbol ample-zen-theme alect-themes aggressive-indent afternoon-theme adaptive-wrap ac-ispell))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(company-tooltip-common ((t (:inherit company-tooltip :weight bold :underline nil))))
- '(company-tooltip-common-selection ((t (:inherit company-tooltip-selection :weight bold :underline nil)))))
+ )
