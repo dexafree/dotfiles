@@ -14,6 +14,9 @@ call plug#begin('~/.config/nvim/plugged')
 " Plug 'Valloric/YouCompleteMe'
 " Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
 
+" Vim-signature (display marks)
+Plug 'kshenoy/vim-signature'
+
 " NERDTree
 Plug 'scrooloose/nerdtree'
 
