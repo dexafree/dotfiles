@@ -96,7 +96,8 @@ before layers configuration."
                                :width normal
                                :powerline-scale 1.1)
    ;; The leader key
-   dotspacemacs-leader-key ","
+;   dotspacemacs-leader-key ","
+    dotspacemacs-leader-key "SPC"
    ;; The leader key accessible in `emacs state' and `insert state'
    dotspacemacs-emacs-leader-key "M-m"
    ;; Major mode leader key is a shortcut key which is the equivalent of
@@ -108,7 +109,8 @@ before layers configuration."
    ;; Emacs commands (M-x).
    ;; By default the command key is `:' so ex-commands are executed like in Vim
    ;; with `:' and Emacs commands are executed with `<leader> :'.
-   dotspacemacs-command-key ":"
+;   dotspacemacs-command-key ":"
+   dotspacemacs-command-key "SPC"
    ;; If non nil then `ido' replaces `helm' for some commands. For now only
    ;; `find-files' (SPC f f) is replaced.
    dotspacemacs-use-ido nil
@@ -297,7 +299,7 @@ layers configuration."
   ;; Line numbers enabled by default
   ;; (setq dotspacemacs-line-numbers t)
 
-  (setq dotspacemacs-leader-key ",")
+  ; (setq dotspacemacs-leader-key ",")
 
   ;; Add little margin between line number and text
   (setq linum-format "%d ")
@@ -322,7 +324,7 @@ layers configuration."
   (evil-leader/set-key "w" 'save-buffer)
 
   ;; <leader>SPC -> Clear search highlight
-  (evil-leader/set-key "SPC" 'evil-search-highlight-persist-remove-all)
+  ; (evil-leader/set-key "SPC" 'evil-search-highlight-persist-remove-all)
 
   ;; <leader>ev -> Open vertical split and load .spacemacs
   (evil-leader/set-key (kbd "ev") 'my-functions/open-dotspacemacs-in-split)
@@ -335,13 +337,13 @@ layers configuration."
 
   ;; Markdown SPC to fold-unfold
   (add-hook 'markdown-mode-hook 'outline-minor-mode)
-  (evil-define-key 'normal markdown-mode-map (kbd "SPC") 'evil-toggle-fold)
+;  (evil-define-key 'normal markdown-mode-map (kbd "SPC") 'evil-toggle-fold)
 
   ;; C mode: hook to autocomplete
   (add-hook 'c-mode-hook 'auto-complete-mode)
 
   ;; Org mode SPC to fold-unfold
-  (evil-define-key 'normal org-mode-map (kbd "SPC") 'evil-toggle-fold)
+;  (evil-define-key 'normal org-mode-map (kbd "SPC") 'evil-toggle-fold)
 
   ;; C-w n for new split with *scratch*
   (define-key evil-normal-state-map (kbd "C-w n") 'my-functions/open-empty-buffer-in-new-split)
